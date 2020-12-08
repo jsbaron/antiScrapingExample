@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="project:war_exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/project_war_exploded</output-path>
+    <root id="archive" name="project_war_exploded.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="project" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-annotations-api:9.0.27" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jdbc:8.5.23" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-juli:8.5.23" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.1" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.21" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.26" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.26" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+          <element id="library" level="project" name="Maven: com.github.vladimir-bukhtoyarov:bucket4j-core:4.10.0" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:9.0.27" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="project/web/Web" />
+    </root>
+  </artifact>
+</component>

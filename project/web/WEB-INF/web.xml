@@ -3,6 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <filter>
+        <filter-name>RateLimitingFilter</filter-name> <!-- mandatory -->
+        <filter-class>servlets.RateLimitingFilter</filter-class> <!-- mandatory -->
+    </filter>
+
+    <filter-mapping>
+        <filter-name>RateLimitingFilter</filter-name> <!-- mandatory -->
+        <url-pattern>/users/*</url-pattern> <!-- either url-pattern or servlet-name is mandatory -->
+    </filter-mapping>
+
     <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>servlets.UserServlet</servlet-class>

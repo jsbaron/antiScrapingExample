@@ -6,7 +6,6 @@ import repositories.UserRepository;
 import utils.RequestParser;
 import utils.RequestType;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ public class UserServlet extends HttpServlet {
 
   private final UserRepository repository = UserRepository.getRepo();
 
-  private void preProcessResponse(HttpServletResponse response) throws IOException {
+  private void preProcessResponse(HttpServletResponse response) {
     response.setContentType("application/json");
     response.setHeader("Access-Control-Allow-Origin", "*");
   }
@@ -50,13 +49,5 @@ public class UserServlet extends HttpServlet {
       default:
         throw new IllegalStateException("Unexpected value: " + requestType);
     }
-
-  }
-
-  @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    preProcessResponse(resp);
-
-//    validateUrlParts(urlParts, resp);
   }
 }
