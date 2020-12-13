@@ -57,7 +57,7 @@ class Scraper {
         });
         await page.goto(WEB_PAGE_URL);
         for (let i=0; i<10; i++) {
-            await page.waitForTimeout(500);
+            await page.waitForTimeout(2000);
             try {
                 await this.addNames(page);
                 await this.addTweet(page);
