@@ -7,8 +7,10 @@ public class RequestParser {
   private static final String GET_USERS_BY_PAGE = "/page/\\d+";
 
   public static Integer getPageNumber(HttpServletRequest request) throws IllegalArgumentException {
-    if (!Pattern.matches(GET_USERS_BY_PAGE, request.getPathInfo())) {
-      throw new IllegalArgumentException("Request does not match " + GET_USERS_BY_PAGE);
+    if (
+        !Pattern.matches(GET_USERS_BY_PAGE, request.getPathInfo())
+    ) {
+      throw new IllegalArgumentException("Invalid path");
     }
     return Integer.parseInt(request.getPathInfo().split("/")[2]);
   }
@@ -22,6 +24,18 @@ public class RequestParser {
     }
 
     return RequestType.INVALID;
+  }
+
+  public static String getClientIp(HttpServletRequest request) {
+    String ip = request.getHeader("X-FORWARDED-FOR");
+    if (ip == null) {
+      ip = request.getRemoteAddr();
+    }
+    return ip;
+  }
+
+  public static String getUserAgent(HttpServletRequest request) {
+    return request.getHeader("User-Agent");
   }
 
   private RequestParser() {}

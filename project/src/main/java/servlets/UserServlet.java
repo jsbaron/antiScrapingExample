@@ -1,7 +1,9 @@
 package servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import models.EventConstants;
 import models.User;
+import repositories.EventLogRepository;
 import repositories.UserRepository;
 import utils.RequestParser;
 import utils.RequestType;
@@ -11,12 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @WebServlet(name = "servlets.UserServlet")
 public class UserServlet extends HttpServlet {
 
-  private final UserRepository repository = UserRepository.getRepo();
+  private final UserRepository userRepository = UserRepository.getRepo();
+  private final EventLogRepository eventLogRepository = EventLogRepository.getRepo();
 
   private void preProcessResponse(HttpServletResponse response) {
     response.setContentType("application/json");
@@ -28,11 +33,25 @@ public class UserServlet extends HttpServlet {
     resp.getWriter().write("Invalid Request");
   }
 
+  private void logGetUsersByPage(HttpServletRequest request) {
+    try {
+      eventLogRepository.insertEventLog(
+          RequestParser.getClientIp(request),
+          EventConstants.GET_USERS_BY_PAGE,
+          RequestParser.getPageNumber(request).toString(),
+          new Timestamp(System.currentTimeMillis())
+      );
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
+  }
+
   private void handleGetUsersByPage(HttpServletRequest request, HttpServletResponse resp) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     resp.setStatus(HttpServletResponse.SC_OK);
-    List<User> users = repository.getTweetsByPage(RequestParser.getPageNumber(request));
+    List<User> users = userRepository.getTweetsByPage(RequestParser.getPageNumber(request));
     resp.getWriter().write(mapper.writeValueAsString(users));
+    logGetUsersByPage(request);
   }
 
   @Override
