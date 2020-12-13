@@ -27,7 +27,6 @@ const Timeline = () => {
                     <Alert variant={"danger"} className={"ml-auto mr-auto mt-5"}>
                         <h3>You're making too many requests!</h3>
                     </Alert>
-
                     :
                     <>
                         <ListGroup className={"mx-auto w-75 mt-5 mb-3"}>
@@ -59,6 +58,12 @@ const Timeline = () => {
                                 ))
                             }
                         </ListGroup>
+                        <button
+                            style={{display: "none"}}
+                            onClick={() => console.log("honey-pot")}
+                        >
+                            I'm a trap.
+                        </button>
                         <PageNav/>
                     </>
             }

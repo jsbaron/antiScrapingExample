@@ -1,8 +1,8 @@
 import axios from "axios";
 import {USERS_ENFORCED} from "../redux/stateConstants";
 
-// const BASE_URL = "http://ec2-54-237-51-236.compute-1.amazonaws.com:8080/project_archive"
-const BASE_URL = "http://localhost:8080/project_archive";
+const BASE_URL = "http://ec2-54-237-51-236.compute-1.amazonaws.com:8080/project_archive"
+// const BASE_URL = "http://localhost:8080/project_archive";
 
 const handleEnforcement = e => {
     if (e.response && e.response.status === 429) {
