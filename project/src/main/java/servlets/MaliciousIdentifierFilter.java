@@ -22,16 +22,17 @@ public class MaliciousIdentifierFilter implements Filter {
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
     HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
     String userAgent = RequestParser.getUserAgent(httpRequest);
-    if (!shouldEnforce(userAgent)) {
+    String ip = RequestParser.getClientIp(httpRequest);
+    if (!shouldEnforce(userAgent, ip)) {
       filterChain.doFilter(servletRequest, servletResponse);
     } else {
       ScrapingEnforcer.enforce(servletResponse);
     }
   }
 
-  private boolean shouldEnforce(String userAgent) {
+  private boolean shouldEnforce(String userAgent, String ip) {
     try {
-      return eventLogRepository.hasBadUserAgent(userAgent);
+      return eventLogRepository.hasBadUserAgent(userAgent) || eventLogRepository.hasBadIp(ip);
     } catch (SQLException throwables) {
       throwables.printStackTrace();
     }

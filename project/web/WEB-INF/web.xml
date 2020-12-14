@@ -54,4 +54,16 @@
         <url-pattern>/users/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>HoneyPotServlet</servlet-name>
+        <servlet-class>servlets.HoneyPotServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HoneyPotServlet</servlet-name>
+        <url-pattern>/honeypot/*</url-pattern>
+    </servlet-mapping>
+
+
+
 </web-app>

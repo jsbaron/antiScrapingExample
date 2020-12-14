@@ -114,6 +114,37 @@ public class EventLogRepository {
         );
   }
 
+  public boolean hasBadIp(String ip) throws SQLException {
+    return shouldEnforce(
+        ip,
+        "SELECT EXISTS( " +
+            " select " +
+            " * " +
+            " from `eventlogs`.bad_ips " +
+            "        where ? = ip_address " +
+            ") as should_enforce"
+    );
+  }
+
+  public void insertBadIp(String ip) throws SQLException {
+    String insertBadIpAddress = "INSERT INTO `eventlogs`.bad_ips(ip_address) VALUES(?);";
+    Connection connection = null;
+    PreparedStatement insertStmt = null;
+
+    try {
+      connection = EventLogDataSource.getDataSourceConnection();
+      insertStmt = connection.prepareStatement(insertBadIpAddress);
+      insertStmt.setString(1, ip);
+      insertStmt.executeUpdate();
+    } catch (SQLException e) {
+      if (e.getErrorCode() != 1062) {
+        throw e;
+      }
+    } finally {
+      close(connection, insertStmt, null);
+    }
+  }
+
 
   public static void close(Connection connection, PreparedStatement statement, ResultSet results) throws SQLException {
     if (connection != null) {

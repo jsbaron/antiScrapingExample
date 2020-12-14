@@ -5,6 +5,7 @@ import API from "../utils/API";
 import {Button, Card, ListGroup, Alert} from "react-bootstrap";
 import PageNav from "./PageNav";
 import {USERS_ENFORCED} from "../redux/stateConstants";
+import HoneyPotButton from "./HoneyPotButton";
 
 const Timeline = () => {
     const dispatch = useDispatch();
@@ -58,12 +59,7 @@ const Timeline = () => {
                                 ))
                             }
                         </ListGroup>
-                        <button
-                            style={{display: "none"}}
-                            onClick={() => console.log("honey-pot")}
-                        >
-                            I'm a trap.
-                        </button>
+                        <HoneyPotButton/>
                         <PageNav/>
                     </>
             }

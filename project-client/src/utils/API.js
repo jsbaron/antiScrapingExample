@@ -21,7 +21,10 @@ const API =  {
         } catch (e) {
             return handleEnforcement(e)
         }
-
+    },
+    writeHoneyPot: async () => {
+        await axios.post(
+            BASE_URL + '/honeypot/');
     }
 }
 export default API;
