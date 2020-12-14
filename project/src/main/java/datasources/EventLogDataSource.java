@@ -9,10 +9,10 @@ import java.sql.SQLException;
 public class EventLogDataSource {
   private static final PoolProperties properties = new PoolProperties();
   private static final DataSource dataSource = new DataSource();
-  private static final String JDBC_URL = "jdbc:mysql://cs6760-project-db.cwzy8anfsscs.us-east-1.rds.amazonaws.com:3306/eventlogs?useSSL=False";
-  private static final String DRIVER_STRING = "com.mysql.cj.jdbc.Driver";
-  private static final String USERNAME = "admin";
-  private static final String PASSWORD = "admin123";
+  private static final String JDBC_URL = "YOUR_JDBC_URL_HERE";
+  private static final String DRIVER_STRING = "YOUR_DRIVER_STRING_HERRE";
+  private static final String USERNAME = "";
+  private static final String PASSWORD = "";
 
   static {
     properties.setUrl(JDBC_URL);
